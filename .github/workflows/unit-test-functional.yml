@@ -1,5 +1,9 @@
 name: Build And Run BPLib Functional Tests
 
+on:
+  push:
+  pull_request:
+
 # Force bash to apply pipefail option so pipeline failures aren't masked
 defaults:
   run:
