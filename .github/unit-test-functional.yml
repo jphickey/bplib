@@ -1,20 +1,5 @@
 name: Build And Run BPLib Functional Tests
 
-on:
-  workflow_call:
-    inputs:
-      # Optional inputs
-      app-name:
-        description: Application name, if different from repo name
-        type: string
-        required: false
-        default: ${{ github.event.repository.name }}
-      startup-string:
-        description: Startup string to confirm, default will use "<APP> Initialized."
-        type: string
-        required: false
-        default: ''
-
 # Force bash to apply pipefail option so pipeline failures aren't masked
 defaults:
   run:
