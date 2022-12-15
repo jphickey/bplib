@@ -220,6 +220,7 @@ void bplib_route_test(void)
 void bplib_bundle_test(void)
 {
     bp_socket_t  *desc;
+    const char    my_payload_in[] = "The Answer to the Ultimate Question of Life, The Universe, and Everything is 47";
     const char    my_payload[] = "The Answer to the Ultimate Question of Life, The Universe, and Everything is 42";
     char          recv_payload[1 + sizeof(my_payload)];
     size_t        bundle_sz;
@@ -240,9 +241,9 @@ void bplib_bundle_test(void)
     UtAssert_VOIDCALL(bplib_route_maintenance_complete_wait(s1_rtbl));
 
     UtDebug("@%lu: Storing payload:\n", (unsigned long)bplib_os_get_dtntime_ms());
-    display(stdout, (const uint8_t *)my_payload, 0, sizeof(my_payload));
+    display(stdout, (const uint8_t *)my_payload_in, 0, sizeof(my_payload_in));
 
-    UtAssert_INT32_EQ(bplib_send(desc, my_payload, sizeof(my_payload), BP_CHECK), BP_SUCCESS);
+    UtAssert_INT32_EQ(bplib_send(desc, my_payload_in, sizeof(my_payload_in), BP_CHECK), BP_SUCCESS);
 
     /* Setting the CLA "up" should cause the previously-blocked bundle to unblock */
     UtAssert_INT32_EQ(bplib_route_intf_set_flags(s1_rtbl, s1_intf_cla, BPLIB_INTF_STATE_OPER_UP), BP_SUCCESS);
